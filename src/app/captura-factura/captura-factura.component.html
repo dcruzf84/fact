@@ -1,0 +1,150 @@
+<p style="text-align: center;">captura-factura!</p>
+<div class="dcf-main-content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registro de Facturas</mat-card-title>
+      <mat-card-subtitle>Datos del Excel de la Solicitud de Pedido</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img matCardImage src="Card wide image source"> -->
+    <mat-card-content class="dcf-mat-card-content">
+      <div class="input-form">
+        <mat-form-field class="input-full-width">
+          <mat-label>Factura</mat-label>
+          <input matInput placeholder="No. Factura" type="text" [(ngModel)]="valueFactura">
+          <button mat-button *ngIf="valueFactura" matSuffix mat-icon-button aria-label="Clear"
+            (click)="valueFactura=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Fecha Factura</mat-label>
+          <input matInput [matDatepicker]="picker" [formControl]="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Monto Sin/IVA</mat-label>
+          <input type="number" matInput placeholder="Ingrese el Monto SIN IVA">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Monto Con/IVA</mat-label>
+          <input type="number" matInput placeholder="Ingrese el Monto con IVA">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput placeholder="Descripción Factura"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Estatus</mat-label>
+          <input matInput placeholder="Ingrese el Estatus Inicial">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Moneda</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let moneda of tipoMonedas" [value]="moneda.idMoneda">
+              {{moneda.tipoMoneda}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Razón Social</mat-label>          
+          <mat-select>
+            <mat-option *ngFor="let razonSocial of razonesSociales" [value]="razonSocial.id">
+              {{razonSocial.razonSocial}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Notas de la Factura
+            </mat-panel-title>
+            <mat-panel-description>
+              Abre para ver todas las notas
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <!-- Tabla -->
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+              <ng-container matColumnDef="idNota">
+                <th  mat-header-cell *matHeaderCellDef mat-sort-header="idNota"> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.idNota}} </td>
+              </ng-container>
+             
+              <ng-container matColumnDef="nota" mat-sort-header="nota" mat-sort-header="nota">
+                <th mat-header-cell *matHeaderCellDef> Nota </th>
+                <td mat-cell *matCellDef="let element"> {{element.nota}} </td>
+              </ng-container>
+ 
+              <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <span>Opción</span>
+                </th>
+                <td   mat-cell *matCellDef="let row">
+                   <!-- Mandar a llamar el modal Dialog -->
+                  <button class="dcf-opcion" mat-icon-button aria-label="icon-button with a icon"  (click)="openDialog()">
+                    <mat-icon>add</mat-icon>
+                  </button>                 
+                  &nbsp;
+                  <button class="dcf-opcion" mat-icon-button aria-label="icon-button with a icon" (click)="openDialog()">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+        
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <!-- <table  id="dcf-tb-captura" matSort (matSortChange)="sortData($event)">
+              <tr>
+                <th mat-sort-header="idNota">No.</th>
+                <th mat-sort-header="nota">Nota</th>
+                <th mat-sort-header="fecha">Fecha</th>      
+              </tr>
+            
+              <tr *ngFor="let element of {{ELEMENT_DATA}}">
+                <td>{{element.idNota}}</td>
+                <td>{{element.nota}}</td>
+                <td>{{element.fecha}}</td>
+              </tr>
+            </table> -->
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+        </mat-expansion-panel>
+        <div class="dcf-btn-padding">
+          <button class="btn-dcf" style="width: 100%;" mat-button (click)="onSaveFactura()"
+            color="primary">Guardar</button>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <!-- <mat-card-actions align="center">
+      <button style="width: 30%;" mat-button (click)="onAction1" color="primary">Cancelar</button>
+    </mat-card-actions> -->
+    <mat-card-footer>
+      <div class="div-footer-aling">
+        <ul class="dcf-menu">
+          <li><a href="#">Ir SP</a></li>
+          <li><a href="#">Ir OC</a></li>
+          <li><a href="#">Ir Vista General</a></li>
+        </ul>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

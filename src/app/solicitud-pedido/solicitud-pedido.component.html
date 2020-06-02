@@ -1,0 +1,153 @@
+<p style="text-align: center;">Captura-factura!</p>
+<div class="dcf-main-content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registro de Solicitud de Pedido</mat-card-title>
+      <mat-card-subtitle>Relacione la factura ó propuesta del proveedor</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img matCardImage src="Card wide image source"> -->
+    <mat-card-content class="dcf-mat-card-content">
+      <div class="input-form">
+
+        <mat-form-field class="input-full-width">
+          <mat-label># SP</mat-label>
+          <input type="number" matInput placeholder="Ingrese el número de Solicitud de Pedido">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Fecha Inicio</mat-label>
+          <input matInput [matDatepicker]="pickerI" [formControl]="date">
+          <mat-datepicker-toggle matSuffix [for]="pickerI"></mat-datepicker-toggle>
+          <mat-datepicker #pickerI></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Fecha Fin</mat-label>
+          <input matInput [matDatepicker]="pickerF" [formControl]="date">
+          <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
+          <mat-datepicker #pickerF></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Concepto</mat-label>
+          <input matInput placeholder="Concepto" [(ngModel)]="vConcepto">
+          <button mat-button *ngIf="vConcepto" matSuffix mat-icon-button aria-label="Clear"
+            (click)="vConcepto=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput placeholder="Descripción de la Solicitud de Pedido"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Estatus</mat-label>
+          <input matInput placeholder="Ingrese el Estatus Inicial">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Tipo de Requerimiento</mat-label>
+          <input matInput placeholder="Ingrese el tipo de servicio">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Texto Posicion</mat-label>
+          <textarea matInput placeholder="Ingrese el texto posicion de la SP"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Procedencia</mat-label>
+          <input matInput placeholder="Concepto" [(ngModel)]="vProcedencia">
+          <button mat-button *ngIf="vProcedencia" matSuffix mat-icon-button aria-label="Clear"
+            (click)="vProcedencia=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field class="dcf-select">
+          <mat-label>Presupuesto</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let presupuesto of tPresupuesto" [value]="presupuesto.id">
+              {{presupuesto.tipo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="dcf-select">
+          <mat-label>Tipo de Servicio</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let servicio of tServicio" [value]="servicio.id">
+              {{servicio.servicio}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Notas de la Solicitud de Pedido
+            </mat-panel-title>
+            <mat-panel-description>
+              Abre para ver todas las notas
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="mat-elevation-z8">
+            <div class="dcf-paddin-lef-rigth">
+              <mat-form-field class="input-full-width ">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="idNota">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.idNota}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nota">
+                <th mat-header-cell *matHeaderCellDef> Nota </th>
+                <td mat-cell *matCellDef="let element"> {{element.nota}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha</th>
+                <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+        </mat-expansion-panel>
+
+        <div class="dcf-btn-padding">
+          <button class="btn-dcf" style="width: 100%;" mat-button (click)="onSave()" color="primary">Guardar</button>
+        </div>
+      </div>
+    </mat-card-content>
+    <!-- <mat-card-actions align="center">
+      <button style="width: 30%;" mat-button (click)="onAction1" color="primary">Cancelar</button>
+    </mat-card-actions> -->
+    <mat-card-footer>
+      <div class="div-footer-aling">
+        <ul class="dcf-menu">
+          <li><a href="#">Ir SP</a></li>
+          <li><a href="#">Ir OC</a></li>
+          <li><a href="#">Ir Vista General</a></li>
+        </ul>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

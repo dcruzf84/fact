@@ -1,0 +1,98 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" 
+   [ngClass]="{hidden: !(isHandset$ | async)!.matches}"
+   fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async)!.matches">
+    <div>
+      <mat-toolbar>Menu
+        <span class="spacer"></span>
+        <!-- <button class="btn-close" mat-raised-button (click)="drawer.toggle()"> X</button>  -->
+        <mat-icon aria-hidden="false" aria-label="home icon" mat-raised-button (click)="drawer.toggle()">close</mat-icon>
+      </mat-toolbar>
+
+    </div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/factura">Factura</a>
+      <a mat-list-item href="/sp">Solicitud de Pedido</a>
+      <a mat-list-item href="/oc">Orden de Compra</a>
+      <a mat-list-item href="#">Seguimiento General</a>
+      <a mat-list-item href="#">Kanban</a>
+      <a mat-list-item href="#">Reportes</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav t|oggle icon">menu</mat-icon>
+      </button>
+      <!-- Header Oprions Menu -->
+      <span id="dcf-home"><a href=""> SPA-Diand  </a></span>
+      <!-- <div class="btn-menu">
+          <button mat-button [matMenuTriggerFor]="aboveMenu">Above</button>
+          <mat-menu #aboveMenu="matMenu" yPosition="above">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+          <mat-menu #belowMenu="matMenu" yPosition="below">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
+          <mat-menu #afterMenu="matMenu" xPosition="after">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+        -->
+      <!-- <mat-button-toggle color="primary">Link 1</mat-button-toggle> -->
+      <ul class="dcf-menu" *ngIf="!(isHandset$ | async)">
+        <li><a mat-list-item routerLink="/factura">Factura</a></li>
+        <li><a mat-list-item href="/sp">SP</a></li>
+        <li><a mat-list-item href="/oc">OC</a></li>
+        <li><a mat-list-item href="#">Seguimiento General</a></li>
+        <li> <a mat-list-item href="#">Kanban</a></li>
+        <li> <a mat-list-item href="#">Reportes</a></li>
+      </ul>
+      <span class="spacer"></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Salir</span>
+        </button>
+      </mat-menu>
+      <!-- Header Oprions Menu -->
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <router-outlet></router-outlet>
+    <!-- /Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,34 @@
+<p style="text-align: center;">orden-compra works!</p>
+<div class="dcf-main-content">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Registro de Orden de Compra</mat-card-title>
+            <mat-card-subtitle>Relacione la Solicitud de Pedido con la Orden de Compra</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-form-field class="input-full-width">
+            <mat-label># OC</mat-label>
+            <input type="number" matInput placeholder="Ingrese el número de Orden de Compra">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Descripción de la Orden de Compra"></textarea>
+          </mat-form-field>
+  
+          <mat-form-field class="input-full-width">
+            <mat-label>Estatus</mat-label>
+            <input matInput placeholder="Ingrese el Estatus Inicial">
+          </mat-form-field>
+
+        <!-- <img matCardImage src="Card wide image source"> -->
+        <mat-card-content class="dcf-mat-card-content">
+            <div class="input-form">
+                <div class="dcf-btn-padding">
+                    <button class="btn-dcf" style="width: 100%;" mat-button (click)="onSave()"
+                        color="primary">Guardar</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
