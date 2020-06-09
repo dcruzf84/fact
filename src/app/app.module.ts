@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import {CapturaFacturaComponent, DialogContentDialog} from './captura-factura/captura-factura.component';
 import { SolicitudPedidoComponent } from './solicitud-pedido/solicitud-pedido.component';
 import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OrdenCompraComponent } from './orden-compra/orden-compra.component';
     DialogContentDialog,
     HomeComponent,
     SolicitudPedidoComponent,
-    OrdenCompraComponent
+    OrdenCompraComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,

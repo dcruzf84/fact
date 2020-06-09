@@ -1,0 +1,60 @@
+mat-form-field {
+    margin-right: 12px;
+  }
+
+  .div-footer-aling{
+    text-align: center;
+    align-content: center;
+    padding: 25px 0;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  .dcf-btn-padding {
+    padding: 2rem 0;
+  }
+  
+  .mat-sort-header-container {
+    align-items: center;
+  }
+
+  Table th td {
+    text-align: center;
+  }
+
+  Table td:first-child {
+    width: 10%;
+  }
+  
+  table td:nth-child(2) {
+    width: 60%;
+    text-align: left;
+  }
+
+  table td:nth-child(3) {
+    width: 10%;
+  }
+  
+  table td:last-child {
+    width: 15%;
+  }
+
+  table tr:nth-child(even){background-color: #f2f2f2;}
+
+  table tr:hover {background-color: #ddd;}
+
+  .dcf-opcion
+  {
+    background-color: #4CAF50;
+    color: white;
+  }
+  table th {
+    font-size: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+  }
+

@@ -1,0 +1,63 @@
+<p style="text-align: center;">Facturación!</p>
+<div class="dcf-main-content">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Facturas</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="dcf-mat-card-content">
+            <div class="input-form">
+                <div class="mat-elevation-z8">
+                    <div class="dcf-paddin-lef-rigth">
+                        <mat-form-field class="input-full-width ">
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                    </div>
+                    <!-- Tabla -->
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+                            <ng-container matColumnDef="idNota">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header="idNota"> No. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.idNota}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="nota" mat-sort-header="nota" mat-sort-header="nota">
+                                <th mat-header-cell *matHeaderCellDef> Nota </th>
+                                <td mat-cell *matCellDef="let element"> {{element.nota}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="fecha">
+                                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                                <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <span>Opción</span>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <!-- Mandar a llamar el modal Dialog -->
+                                    <button class="dcf-opcion" mat-icon-button aria-label="icon-button with a icon"
+                                        (click)="openDialog()">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    &nbsp;
+                                    <button class="dcf-opcion" mat-icon-button aria-label="icon-button with a icon"
+                                        (click)="openDialog()">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
